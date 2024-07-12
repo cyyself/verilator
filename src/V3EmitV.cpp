@@ -682,7 +682,7 @@ class EmitVBaseVisitorConst VL_NOT_FINAL : public EmitCBaseVisitorConst {
                     putfs(nodep, nodep->varp()->prettyName());
                 } else {
                     putfs(nodep, nodep->selfPointer().asString());
-                    putfs(nodep, "->");
+                    putfs(nodep, ".");
                     puts(nodep->varp()->prettyName());
                 }
             } else {

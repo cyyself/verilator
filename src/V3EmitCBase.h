@@ -52,7 +52,7 @@ class EmitCBase VL_NOT_FINAL {
 public:
     static string voidSelfAssign(const AstNodeModule* modp) {
         const string className = prefixNameProtect(modp);
-        return className + "* const __restrict vlSelf VL_ATTR_UNUSED = static_cast<" + className
+        return className + "& __restrict vlSelf VL_ATTR_UNUSED = *static_cast<" + className
                + "*>(voidSelf);\n";
     }
     static string pchClassName() VL_MT_STABLE { return v3Global.opt.prefix() + "__pch"; }
@@ -61,7 +61,7 @@ public:
     }
     static string symClassVar() { return symClassName() + "* __restrict vlSymsp"; }
     static string symClassAssign() {
-        return symClassName() + "* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;\n";
+        return symClassName() + "* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf.vlSymsp;\n";
     }
     static string topClassName() VL_MT_SAFE {  // Return name of top wrapper module
         return v3Global.opt.prefix();

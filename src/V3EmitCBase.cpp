@@ -77,7 +77,7 @@ string EmitCBaseVisitorConst::cFuncArgs(const AstCFunc* nodep) {
     if (nodep->isLoose() && !nodep->isStatic()) {
         if (nodep->isConst().trueKnown()) args += "const ";
         args += prefixNameProtect(EmitCParentModule::get(nodep));
-        args += "* vlSelf";
+        args += "& vlSelf";
     }
     if (nodep->needProcess()) {
         if (!args.empty()) args += ", ";

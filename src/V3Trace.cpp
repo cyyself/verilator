@@ -511,7 +511,7 @@ class TraceVisitor final : public VNVisitor {
             m_regFuncp->addStmtsp(new AstAddrOfCFunc{flp, funcp});
             m_regFuncp->addStmtsp(new AstText{flp, ", ", true});
             m_regFuncp->addStmtsp(new AstConst{flp, funcNum});
-            m_regFuncp->addStmtsp(new AstText{flp, ", vlSelf);\n", true});
+            m_regFuncp->addStmtsp(new AstText{flp, ", &vlSelf);\n", true});
         } else {
             // Sub functions
             funcp->argTypes(bufArg);
@@ -705,7 +705,7 @@ class TraceVisitor final : public VNVisitor {
         // Register it
         m_regFuncp->addStmtsp(new AstText{fl, "tracep->addCleanupCb(", true});
         m_regFuncp->addStmtsp(new AstAddrOfCFunc{fl, cleanupFuncp});
-        m_regFuncp->addStmtsp(new AstText{fl, ", vlSelf);\n", true});
+        m_regFuncp->addStmtsp(new AstText{fl, ", &vlSelf);\n", true});
 
         // Clear global activity flag
         cleanupFuncp->addStmtsp(

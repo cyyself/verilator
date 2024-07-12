@@ -446,7 +446,7 @@ void EmitCFunc::emitDereference(AstNode* nodep, const string& pointer) {
         puts(".");
     } else {
         putns(nodep, pointer);
-        puts("->");
+        puts(".");
     }
 }
 
@@ -603,7 +603,7 @@ void EmitCFunc::emitVarReset(AstVar* varp) {
     AstNodeDType* const dtypep = varp->dtypep()->skipRefp();
     const string varNameProtected = (VN_IS(m_modp, Class) || varp->isFuncLocal())
                                         ? varp->nameProtect()
-                                        : "vlSelf->" + varp->nameProtect();
+                                        : "vlSelf." + varp->nameProtect();
     if (varp->isIO() && m_modp->isTop() && optSystemC()) {
         // System C top I/O doesn't need loading, as the lower level subinst code does it.}
     } else if (varp->isParam()) {

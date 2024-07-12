@@ -556,7 +556,7 @@ public:
         const AstCFunc* const funcp = nodep->funcp();
         UASSERT_OBJ(!funcp->isLoose(), nodep, "Loose method called via AstCMethodCall");
         iterateConst(nodep->fromp());
-        putnbs(nodep, "->");
+        putnbs(nodep, ".");
         putns(funcp, funcp->nameProtect());
         emitCCallArgs(nodep, "", m_cfuncp->needProcess());
     }
@@ -625,7 +625,7 @@ public:
         iterateChildrenConst(nodep);
     }
     void visit(AstCoverDecl* nodep) override {
-        putns(nodep, "vlSelf->__vlCoverInsert(");  // As Declared in emitCoverageDecl
+        putns(nodep, "vlSelf.__vlCoverInsert(");  // As Declared in emitCoverageDecl
         puts("&(vlSymsp->__Vcoverage[");
         puts(cvtToStr(nodep->dataDeclThisp()->binNum()));
         puts("])");
@@ -1214,7 +1214,7 @@ public:
     }
     void visit(AstMemberSel* nodep) override {
         iterateAndNextConstNull(nodep->fromp());
-        putnbs(nodep, "->");
+        putnbs(nodep, ".");
         puts(nodep->varp()->nameProtect());
     }
     void visit(AstStructSel* nodep) override {

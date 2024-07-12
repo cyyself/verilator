@@ -241,7 +241,7 @@ class EmitCImp final : EmitCFunc {
 
         puts("\n");
         m_lazyDecls.emit("void " + modName + "__", protect("_ctor_var_reset"),
-                         "(" + modName + "* vlSelf);");
+                         "(" + modName + "& vlSelf);");
         puts("\n");
 
         putns(modp,
@@ -279,7 +279,7 @@ class EmitCImp final : EmitCFunc {
         puts(" {\n");
 
         putsDecoration(modp, "// Reset structure values\n");
-        puts(modName + "__" + protect("_ctor_var_reset") + "(this);\n");
+        puts(modName + "__" + protect("_ctor_var_reset") + "(*this);\n");
         emitTextSection(modp, VNType::atScCtor);
 
         puts("}\n");
@@ -290,13 +290,13 @@ class EmitCImp final : EmitCFunc {
         if (v3Global.opt.coverage()) {
             puts("\n");
             m_lazyDecls.emit("void " + modName + "__", protect("_configure_coverage"),
-                             "(" + modName + "* vlSelf, bool first);");
+                             "(" + modName + "& vlSelf, bool first);");
         }
 
         puts("\nvoid " + modName + "::" + protect("__Vconfigure") + "(bool first) {\n");
         puts("(void)first;  // Prevent unused variable warning\n");
         if (v3Global.opt.coverage()) {
-            puts(modName + "__" + protect("_configure_coverage") + "(this, first);\n");
+            puts(modName + "__" + protect("_configure_coverage") + "(*this, first);\n");
         }
         puts("}\n");
         splitSizeInc(10);
